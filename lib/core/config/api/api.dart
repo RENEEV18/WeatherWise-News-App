@@ -1,9 +1,6 @@
-// The Class Represents Api URLs & BaseURLs
+// The Class Represents Api Key & BaseURL
 class AppApiUrl {
   // API Constants
-  static const apiKey = 'a066941d1b1246f6a1971636231602';
-  static const apiBaseUrl = 'https://api.weatherapi.com/v1';
-
-  // API Endpoints
-  static const getCurrentWeather = "$apiBaseUrl/current.json?key=$apiKey";
+  static const apiKey = '8419e06afc2c3123e82374fa5db868e7';
+  static const apiBaseUrl = 'https://api.openweathermap.org/data/2.5';
 }
