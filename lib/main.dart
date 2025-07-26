@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weatherwise_news_app/core/config/di/di.dart';
+import 'package:weatherwise_news_app/core/config/bindings/bindings.dart';
+import 'package:weatherwise_news_app/core/utils/shared_pref.dart';
+import 'package:weatherwise_news_app/routes/route_constants.dart';
 import 'package:weatherwise_news_app/routes/routes.dart';
 
-void main() {
-  AppBinding().dependencies();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetItService().setupLocator();
   runApp(const MyApp());
 }
 
@@ -17,7 +20,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'WeatherWise News App',
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRoutes.generateRoute,
+      initialRoute: AppRouteConstants.splashRoute,
+      getPages: AppRoutes.routes,
+      initialBinding: AppBinding(),
     );
   }
 }

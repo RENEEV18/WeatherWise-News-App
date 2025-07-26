@@ -9,15 +9,37 @@ abstract class HomeService {
   Future<Response<dynamic>> getCurrentWeatherService(
       {required String city, required String units, required String type}) async {
     try {
-      final userInfo = dio.get(
-        "${AppApiUrl.apiBaseUrl}/$type",
+      final weatherInfo = dio.get(
+        "${AppApiUrl.weatherApiBaseUrl}/$type",
         queryParameters: {
           "q": city,
-          "appid": AppApiUrl.apiKey,
+          "appid": AppApiUrl.weatherApiKey,
           "units": units,
         },
       );
-      return userInfo;
+      return weatherInfo;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Service function to get news headlines
+  Future<Response<dynamic>> getNewsService({
+    required String query,
+    required int page,
+    required int pageSize,
+  }) async {
+    try {
+      final newsInfo = await dio.get(
+        "${AppApiUrl.newsApiBaseUrl}/everything",
+        queryParameters: {
+          "q": query,
+          "page": page,
+          "pageSize": pageSize,
+          "apiKey": AppApiUrl.newsApiKey,
+        },
+      );
+      return newsInfo;
     } catch (e) {
       rethrow;
     }

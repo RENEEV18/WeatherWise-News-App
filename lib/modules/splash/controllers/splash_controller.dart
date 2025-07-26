@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:weatherwise_news_app/routes/route_constants.dart';
 
 //Splash Controller Class - Which Defines All Functions & Variables To Use In SplashScreen
 class SplashController extends GetxController {
@@ -12,7 +13,7 @@ class SplashController extends GetxController {
       showText.value = true;
     });
     Future.delayed(const Duration(seconds: 3), () {
-      Get.offNamed('/home');
+      Get.offNamed(AppRouteConstants.homeRoute);
     });
   }
 }

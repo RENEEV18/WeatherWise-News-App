@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>App requires access to your location to track your job site locations accurately, ensuring that you are at the correct site while the app is in use.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>App requires access to your location in the background to provide continuous location updates and ensure job site accuracy, even when the app is not in the foreground.</string>
 </dict>
 </plist>
