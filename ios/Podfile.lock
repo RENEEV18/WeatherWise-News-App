@@ -1,4 +1,6 @@
 PODS:
+  - connectivity_plus (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - geocoding_ios (1.0.5):
     - Flutter
@@ -14,6 +16,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - geocoding_ios (from `.symlinks/plugins/geocoding_ios/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/darwin`)
@@ -22,6 +25,8 @@ DEPENDENCIES:
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
     :path: Flutter
   geocoding_ios:
@@ -36,6 +41,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  connectivity_plus: 2a701ffec2c0ae28a48cf7540e279787e77c447d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   geocoding_ios: eafacae6ad11a1eb56681f7d11df602a5fd49416
   geolocator_apple: 66b711889fd333205763b83c9dcf0a57a28c7afd
