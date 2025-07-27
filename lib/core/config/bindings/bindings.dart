@@ -8,7 +8,7 @@ class AppBinding extends Bindings {
   void dependencies() async {
     final prefs = await SharedPreferences.getInstance();
     final helperFormatter = HelperFormatFunctions();
-    Get.put<SharedPreferences>(prefs);
-    Get.put<HelperFormatFunctions>(helperFormatter);
+    Get.put<SharedPreferences>(prefs, permanent: true);
+    Get.put<HelperFormatFunctions>(helperFormatter, permanent: true);
   }
 }

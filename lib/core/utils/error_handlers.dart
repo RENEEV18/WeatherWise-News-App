@@ -1,14 +1,20 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:weatherwise_news_app/core/constants/colors/colors.dart';
 
 // This Class Represents All The Error Handling Conditions.
 class AppErrorHandler {
   /// User centric snackbar
+
   static void showError(dynamic error) {
     final message = _mapErrorToMessage(error);
     Get.snackbar(
       "Oops!",
+      backgroundColor: AppColors.primaryWhite,
+      colorText: AppColors.primaryColor,
       message,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
@@ -17,7 +23,8 @@ class AppErrorHandler {
 
   // Other error conditions
   static String _mapErrorToMessage(dynamic error) {
-    if (error is SocketException) {
+    log("error message : $error");
+    if (error is SocketException || error is PlatformException) {
       return "No internet connection. Please check your network.";
     } else if (error is TimeoutException) {
       return "The request timed out. Try again later.";

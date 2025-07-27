@@ -8,4 +8,5 @@ class AppIcons {
 class AppImageVectors {
   static const String folderPath = "assets/vectors/";
   static const loadingSvg = '${folderPath}Loading Dots Blue.json';
+  static const newsLoading = '${folderPath}news_loading.json';
 }

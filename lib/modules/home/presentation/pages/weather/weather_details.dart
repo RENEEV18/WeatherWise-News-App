@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weatherwise_news_app/core/constants/colors/colors.dart';
@@ -48,16 +49,18 @@ class WeatherDetailsState extends State<WeatherDetails> {
               weather.windSpeed.toString(),
               weather.visibility.toString(),
             ];
-            return Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.primaryWhite.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: WeatherDetailItem(
-                title: weatherDataItems[index],
-                value: valueItems[index],
-                iconData: weatherDataIcons[index],
+            return FadeInUp(
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryWhite.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: WeatherDetailItem(
+                  title: weatherDataItems[index],
+                  value: valueItems[index],
+                  iconData: weatherDataIcons[index],
+                ),
               ),
             );
           },

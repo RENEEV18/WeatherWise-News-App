@@ -15,6 +15,9 @@ class HomeController extends GetxController {
   final SharedPreferences prefs = Get.find<SharedPreferences>();
   final HelperFormatFunctions formatter = Get.find<HelperFormatFunctions>();
 
+  final RxBool isExpanded = false.obs;
+  RxInt currentPage = 1.obs;
+
   ////-------------WEATHER FUNCTIONS---------------------------------
   // OnInit function
   @override
@@ -25,7 +28,7 @@ class HomeController extends GetxController {
 
   // Controller function to get current weather data.
   getCurrentWeatherData({required String city, required String units}) async {
-    weatherState.value = weatherState.value.copyWith(isWeatherDataLoading: true);
+    weatherState.value = weatherState.value.copyWith(isWeatherDataLoading: true, errorMessage: '');
     try {
       await _homeRepo
           .getCurrentWeatherRepo(
@@ -38,6 +41,7 @@ class HomeController extends GetxController {
             isWeatherDataLoading: false,
             cityName: formatter.checkValue(value.name),
             currentTemp: value.main?.temp ?? 0.0,
+            icon: value.weather == [] ? '' : value.weather?.first.icon,
             weather: value.weather == [] ? 'No data' : value.weather?.first.main,
             weatherDescription: value.weather == [] ? 'No description' : value.weather?.first.description ?? '',
             humidity: formatter.checkValue(value.main?.humidity.toString()),
@@ -59,7 +63,7 @@ class HomeController extends GetxController {
 
   // Controller function to get forecast data
   getForeCastData({required String city, required String units}) async {
-    weatherState.value = weatherState.value.copyWith(isForecastLoading: true);
+    weatherState.value = weatherState.value.copyWith(isForecastLoading: true, errorMessage: '');
     try {
       await _homeRepo
           .getForecastRepo(
@@ -92,26 +96,48 @@ class HomeController extends GetxController {
     }
   }
 
+  void changeUnit({required String value}) {
+    weatherState.value = weatherState.value.copyWith(
+      selectedUnit: value,
+    );
+  }
+
   ////-------------NEWS FUNCTIONS---------------------------------
   // Controller function to get news data
-  getNewsData({required String country, required int page, required int pageSize}) async {
-    weatherState.value = weatherState.value.copyWith(isNewsLoading: true);
+  getNewsData({
+    required String country,
+    required int page,
+    required int pageSize,
+  }) async {
+    weatherState.value = weatherState.value.copyWith(isNewsLoading: true, errorMessage: '');
+
     try {
-      await _homeRepo
-          .getNewsRepo(
+      final value = await _homeRepo.getNewsRepo(
         country: country,
         page: page,
         pageSize: pageSize,
-      )
-          .then(
-        (value) {
-          weatherState.value = weatherState.value.copyWith(
-            isNewsLoading: false,
-            getNewsModel: value,
-          );
-          log("Sucess API Called : $value");
-        },
       );
+
+      if (page == 1) {
+        weatherState.value = weatherState.value.copyWith(
+          isNewsLoading: false,
+          getNewsModel: value,
+        );
+      } else {
+        final currentArticles = weatherState.value.getNewsModel.articles ?? [];
+        final newArticles = value.articles ?? [];
+
+        currentArticles.addAll(newArticles);
+
+        weatherState.value = weatherState.value.copyWith(
+          isNewsLoading: false,
+          getNewsModel: weatherState.value.getNewsModel.copyWith(
+            articles: currentArticles,
+          ),
+        );
+      }
+
+      log("Success API Called: Page $page, Articles: ${weatherState.value.getNewsModel.articles?.length}");
     } catch (e) {
       weatherState.value = weatherState.value.copyWith(
         isNewsLoading: false,
@@ -119,6 +145,12 @@ class HomeController extends GetxController {
       );
       AppErrorHandler.showError(e);
     }
+  }
+
+  // Function for pagination
+  void loadNextPage() {
+    currentPage++;
+    getNewsData(country: prefs.getString("country_name").toString(), page: currentPage.value, pageSize: 10);
   }
 
   ////-------------LOCATION FUNCTION---------------------------------
@@ -184,8 +216,12 @@ class HomeController extends GetxController {
       );
       weatherState.value = weatherState.value.copyWith(
         selectedUnit: "metric",
+        errorMessage: "",
       );
     } catch (e) {
+      weatherState.value = weatherState.value.copyWith(
+        errorMessage: e.toString(),
+      );
       AppErrorHandler.showError(e);
       rethrow;
     }

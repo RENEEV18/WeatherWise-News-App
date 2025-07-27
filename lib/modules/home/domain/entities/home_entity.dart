@@ -16,6 +16,7 @@ class HomeEntity {
   final String windSpeed;
   final String visibility;
   final String selectedUnit;
+  final String icon;
 
   // Forecast
   final List<ForecastDayEntity> forecast;
@@ -39,6 +40,7 @@ class HomeEntity {
     required this.forecast,
     required this.getNewsModel,
     required this.errorMessage,
+    required this.icon,
   });
 
   /// Initial/default state
@@ -59,6 +61,7 @@ class HomeEntity {
       forecast: [],
       getNewsModel: GetNewsModel(),
       errorMessage: '',
+      icon: '',
     );
   }
 
@@ -79,6 +82,7 @@ class HomeEntity {
     List<ForecastDayEntity>? forecast,
     GetNewsModel? getNewsModel,
     String? errorMessage,
+    String? icon,
   }) {
     return HomeEntity(
       isWeatherDataLoading: isWeatherDataLoading ?? this.isWeatherDataLoading,
@@ -96,6 +100,7 @@ class HomeEntity {
       forecast: forecast ?? this.forecast,
       getNewsModel: getNewsModel ?? this.getNewsModel,
       errorMessage: errorMessage ?? this.errorMessage,
+      icon: icon ?? this.icon,
     );
   }
 }

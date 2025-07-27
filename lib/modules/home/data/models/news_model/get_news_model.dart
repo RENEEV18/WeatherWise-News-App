@@ -26,6 +26,19 @@ class GetNewsModel {
         "totalResults": totalResults,
         "articles": articles == null ? [] : List<dynamic>.from(articles!.map((x) => x.toJson())),
       };
+
+  /// CopyWith for updating specific fields
+  GetNewsModel copyWith({
+    String? status,
+    int? totalResults,
+    List<Article>? articles,
+  }) {
+    return GetNewsModel(
+      status: status ?? this.status,
+      totalResults: totalResults ?? this.totalResults,
+      articles: articles ?? this.articles,
+    );
+  }
 }
 
 class Article {
@@ -70,6 +83,29 @@ class Article {
         "publishedAt": publishedAt?.toIso8601String(),
         "content": content,
       };
+
+  /// CopyWith for updating specific fields
+  Article copyWith({
+    Source? source,
+    String? author,
+    String? title,
+    String? description,
+    String? url,
+    String? urlToImage,
+    DateTime? publishedAt,
+    String? content,
+  }) {
+    return Article(
+      source: source ?? this.source,
+      author: author ?? this.author,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      url: url ?? this.url,
+      urlToImage: urlToImage ?? this.urlToImage,
+      publishedAt: publishedAt ?? this.publishedAt,
+      content: content ?? this.content,
+    );
+  }
 }
 
 class Source {
@@ -90,4 +126,15 @@ class Source {
         "id": id,
         "name": name,
       };
+
+  /// CopyWith for updating specific fields
+  Source copyWith({
+    String? id,
+    String? name,
+  }) {
+    return Source(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
 }

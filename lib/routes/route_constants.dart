@@ -4,4 +4,6 @@ class AppRouteConstants {
   static const splashRoute = '/';
   // Route For Home Module
   static const homeRoute = '/home';
+  // Route For Settings Module
+  static const settingsRoute = '/settings';
 }

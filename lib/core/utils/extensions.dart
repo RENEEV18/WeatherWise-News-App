@@ -1,4 +1,6 @@
 // The Class Represents All String Extensions.
+import 'package:intl/intl.dart';
+
 extension StringCasingExtension on String {
   // Capitalizes the first letter of each word (Title Case)
   String toTitleCase() {
@@ -22,5 +24,10 @@ class HelperFormatFunctions {
   String formatDay(DateTime? dateTime) {
     if (dateTime == null) return '';
     return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dateTime.weekday % 7];
+  }
+
+  String formatPublishedDate(DateTime? date) {
+    if (date == null) return '';
+    return DateFormat('dd MMM yyyy, hh:mm a').format(date);
   }
 }

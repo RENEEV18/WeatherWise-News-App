@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weatherwise_news_app/core/constants/colors/colors.dart';
 import 'package:weatherwise_news_app/core/constants/images/images.dart';
 import 'package:weatherwise_news_app/modules/splash/controllers/splash_controller.dart';
 
@@ -13,6 +14,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -48,6 +50,7 @@ class SplashScreen extends StatelessWidget {
                                   "WeatherNews",
                                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                         fontWeight: FontWeight.w800,
+                                        color: AppColors.primaryWhite,
                                       ),
                                 ),
                               )

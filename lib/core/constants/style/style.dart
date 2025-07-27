@@ -54,10 +54,12 @@ class AppStyle {
 
 // The Class Represents All Padding Constants Used.
 class AppPadding {
-  static const scaffoldPadding = Padding(
-    padding: EdgeInsets.symmetric(
-      horizontal: 20,
-      vertical: 10,
-    ),
+  static const scaffoldPadding = EdgeInsets.symmetric(
+    horizontal: 20,
+    vertical: 10,
+  );
+  static const bottomButtonP = EdgeInsets.symmetric(
+    horizontal: 10,
+    vertical: 30,
   );
 }
